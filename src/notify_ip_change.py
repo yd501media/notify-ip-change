@@ -38,16 +38,21 @@ if __name__ == "__main__":
     
     DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL")
     SERVER_PORT = os.getenv("SERVER_PORT")
+    NOTIFICATION_MESSAGE = os.getenv("NOTIFICATION_MESSAGE", "New Server IP Detected")
     IP_FILE_PATH = "../server_ip.txt"
     
-    if not DISCORD_WEBHOOK_URL or not SERVER_PORT:
-        print("Error: Environment variables DISCORD_WEBHOOK_URL and SERVER_PORT must be set in .env file.")
+    if not DISCORD_WEBHOOK_URL:
+        print("Error: Environment variable DISCORD_WEBHOOK_URL must be set in .env file.")
         exit(1)
     
     ip_address = get_global_ip()
     ip_address_old = read_old_ip(IP_FILE_PATH)
     
     if ip_address and ip_address != ip_address_old:
-        message = f"Minecraft Server Global IP has changed: {ip_address}:{SERVER_PORT}"
+        if SERVER_PORT:
+            message = f"{NOTIFICATION_MESSAGE}: {ip_address}:{SERVER_PORT}"
+        else:
+            message = f"{NOTIFICATION_MESSAGE}: {ip_address}"
+        
         send_to_discord(DISCORD_WEBHOOK_URL, message)
         write_new_ip(IP_FILE_PATH, ip_address)
