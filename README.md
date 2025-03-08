@@ -9,7 +9,7 @@ Follow these steps to set up the environment:
 ### 1. Clone the Repository
 ```sh
 git clone https://github.com/yd501media/notify-ip-change.git
-cd notify-ip_change
+cd notify-ip-change
 ```
 
 ### 2. Install Required Python Libraries
