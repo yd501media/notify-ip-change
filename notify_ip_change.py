@@ -1,6 +1,7 @@
 import requests
 import json
 import os
+from dotenv import load_dotenv
 
 def get_global_ip():
     try:
@@ -32,12 +33,14 @@ def send_to_discord(webhook_url, message):
         print(f"Error sending message to Discord: {e}")
 
 if __name__ == "__main__":
+    load_dotenv()
+    
     DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL")
     SERVER_PORT = os.getenv("SERVER_PORT")
     IP_FILE_PATH = "server_ip.txt"
     
     if not DISCORD_WEBHOOK_URL or not SERVER_PORT:
-        print("Error: Environment variables DISCORD_WEBHOOK_URL and SERVER_PORT must be set.")
+        print("Error: Environment variables DISCORD_WEBHOOK_URL and SERVER_PORT must be set in .env file.")
         exit(1)
     
     ip_address = get_global_ip()
