@@ -33,13 +33,15 @@ def send_to_discord(webhook_url, message):
         print(f"Error sending message to Discord: {e}")
 
 if __name__ == "__main__":
-    dotenv_path = os.path.join(os.path.dirname(__file__), "..", ".env")
+    dotenv_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".env")
     load_dotenv(dotenv_path)
     
     DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL")
     SERVER_PORT = os.getenv("SERVER_PORT")
     NOTIFICATION_MESSAGE = os.getenv("NOTIFICATION_MESSAGE", "New Server IP Detected")
-    IP_FILE_PATH = "../server_ip.txt"
+    
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    IP_FILE_PATH = os.path.join(project_root, "server_ip.txt")
     
     if not DISCORD_WEBHOOK_URL:
         print("Error: Environment variable DISCORD_WEBHOOK_URL must be set in .env file.")
