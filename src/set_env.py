@@ -3,7 +3,7 @@ import argparse
 
 def set_env_variable(env_var, value):
     os.environ[env_var] = value
-    with open(".env", "a") as file:
+    with open("../.env", "a") as file:
         file.write(f"{env_var}={value}\n")
     print(f"{env_var} saved to environment variable and .env file.")
 
