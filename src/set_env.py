@@ -8,13 +8,16 @@ def set_env_variable(env_var, value):
     print(f"{env_var} saved to environment variable and .env file.")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Set environment variables for Discord Webhook URL and Port Number.")
-    parser.add_argument("--webhook", help="The Discord Webhook URL to set as an environment variable.")
-    parser.add_argument("--port", help="The port number to set as an environment variable.")
+    parser = argparse.ArgumentParser(description="Set environment variables for Discord Webhook URL, Port Number, and Notification Message.")
+    parser.add_argument("--webhook", required=True, help="The Discord Webhook URL to set as an environment variable. (Required)")
+    parser.add_argument("--port", help="The port number to set as an environment variable. (Optional)")
+    parser.add_argument("--message", help="The custom notification message to set as an environment variable. (Optional)")
     args = parser.parse_args()
     
-    if args.webhook:
-        set_env_variable("DISCORD_WEBHOOK_URL", args.webhook)
+    set_env_variable("DISCORD_WEBHOOK_URL", args.webhook)
     
     if args.port:
         set_env_variable("SERVER_PORT", args.port)
+    
+    if args.message:
+        set_env_variable("NOTIFICATION_MESSAGE", args.message)
