@@ -33,11 +33,12 @@ def send_to_discord(webhook_url, message):
         print(f"Error sending message to Discord: {e}")
 
 if __name__ == "__main__":
-    load_dotenv()
+    dotenv_path = os.path.join(os.path.dirname(__file__), "..", ".env")
+    load_dotenv(dotenv_path)
     
     DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL")
     SERVER_PORT = os.getenv("SERVER_PORT")
-    IP_FILE_PATH = "server_ip.txt"
+    IP_FILE_PATH = "../server_ip.txt"
     
     if not DISCORD_WEBHOOK_URL or not SERVER_PORT:
         print("Error: Environment variables DISCORD_WEBHOOK_URL and SERVER_PORT must be set in .env file.")
