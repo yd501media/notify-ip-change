@@ -86,7 +86,7 @@ crontab -e
 ### 2. Add the Following Entry
 Ensure the virtual environment is activated before running the script:
 ```sh
-0 * * * * cd /path/to/notify-ip-change && source .venv/bin/activate && /usr/bin/python3 src/notify_ip_change.py
+0 * * * * cd /path/to/notify-ip-change && source .venv/bin/activate && python src/notify_ip_change.py
 ```
 
 This will check for IP changes every 60 minutes and notify Discord if the IP has changed.
