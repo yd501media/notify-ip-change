@@ -12,7 +12,14 @@ git clone https://github.com/yd501media/notify-ip-change.git
 cd notify-ip-change
 ```
 
-### 2. Install Required Python Libraries
+### 2. Create and Activate a Virtual Environment
+It is recommended to use a virtual environment to manage dependencies.
+```sh
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+### 3. Install Required Python Libraries
 ```sh
 pip install -r requirements.txt
 ```
@@ -20,6 +27,11 @@ pip install -r requirements.txt
 ## Usage
 
 ### 1. Set Environment Variables
+Activate the virtual environment before setting environment variables:
+```sh
+source .venv/bin/activate
+```
+
 Use `set_env.py` to configure the required environment variables:
 ```sh
 python3 src/set_env.py --webhook https://discord.com/api/webhooks/YOUR_WEBHOOK_URL --port 25565 --message "New Server IP Detected"
@@ -37,6 +49,11 @@ NOTIFICATION_MESSAGE=New Server IP Detected
 - `NOTIFICATION_MESSAGE` (*Optional*): A custom message to include in notifications.
 
 ### 2. Run the Script
+Before running the script, activate the virtual environment:
+```sh
+source .venv/bin/activate
+```
+
 Navigate to the project root and execute `notify_ip_change.py`:
 ```sh
 python3 src/notify_ip_change.py
@@ -67,8 +84,9 @@ crontab -e
 ```
 
 ### 2. Add the Following Entry
+Ensure the virtual environment is activated before running the script:
 ```sh
-0 * * * * cd /path/to/notify-ip-change && /usr/bin/python3 src/notify_ip_change.py
+0 * * * * cd /path/to/notify-ip-change && source .venv/bin/activate && /usr/bin/python3 src/notify_ip_change.py
 ```
 
 This will check for IP changes every 60 minutes and notify Discord if the IP has changed.
